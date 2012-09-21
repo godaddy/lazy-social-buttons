@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<head>
+<script src="//img3.wsimg.com/AtlantisScripts/jquery/jquery-1.5.1.min.js"></script>
+
+<title>Lazy Social Buttons Plugin</title>
+<style>
+	li {
+		padding: 5px;
+	}
+</style>
+</head>
+<body>
+<div id="main">
+	<h1>Lazy Social Buttons Plugin</h1>
+	<div style="width: 450px;">
+			<a href="javascript: void(0);" onclick="loadDynamic();return false;" >Load a share dynamically</a>
+		
+	</div>
+	
+	<div class="wrap" style="margin: 50px;">
+		<div style="margin: 0 0 10px 0">Loaded via attribute decoration:</div>
+		<div class="lazysocialbuttons" data-float="left" id="shareme" data-twshareurl="http://allthingsd.com" data-twtext="Look, it's All Things D! " data-shareurl="http://google.com" data-twhash="HotForTech" data-twrelated="GoDaddy" data-twvia="twicodeer" data-twreply="35782000644194304"></div>
+	</div>
+	<div class="wrap" style="margin: 50px;">
+		<div style="margin: 0 0 10px 0">Loaded via explicit plugin call:</div>
+		<div id="sharemetoo"></div>
+	</div>
+	
+	<h2>Documentation</h2>
+	<div>
+<h3>Example of Blocking Script include: </h3>
+<pre>
+	&lt;script id="LazySocialButtonsScript" src="<script>document.write(window.location.href.replace(/http:|https:/i, "").replace("fos.share.demo.html", "fos.share.js"));</script>"&gt;&lt;/script&gt;
+</pre>
+<br />
+<h3>Example of Non-Blocking Script include: </h3>
+<pre>
+	&lt;script&gt;
+		function lsbReady() {
+			$('#sharemetoo').lazySocialButtons({ shareUrl: 'http://godaddy.com' });
+		};
+		
+		(function (loaded){
+			var d = document, 
+				id = 'LazySocialButtonsScript', 
+				src = '<script>document.write(window.location.href.replace(/http:|https:/i, "").toLowerCase().replace("lazysocialbuttons.demo.html", "lazySocialButtons.js"));</script>';
+			var js, st = d.getElementsByTagName('script')[0];
+			if (d.getElementById(id)) { return; }
+			js = d.createElement('script');
+			js.id = id;
+			js.type = "text/javascript";
+			js.async = true;
+			js.src = src;
+			st.parentNode.insertBefore(js, st);
+			
+			// if we have a callback, execute it
+			if (typeof(loaded) === 'function') {
+				(function checkLoaded() {
+					if (!$.fn.lazySocialButtons) setTimeout(checkLoaded, 100);
+					else loaded();
+				})();
+			}
+		})(lsbReady);
+	&lt;/script&gt;
+</pre>
+<br />
+
+		<h3>Options:</h3>
+		<ul>
+			<li><strong>shareUrl [js], data-shareurl [html]:</strong> The url that will be shared.  If not specified, open graph tags will be queried.  If no OG tags, then the page's location will be used.</li>
+			<li><strong>google.shareUrl [js], data-gpshareurl [html]:</strong> The url that will be shared for the Google button.  Defaults to shareUrl if not specified.</li>
+			<li><strong>twitter.shareUrl [js], data-twshareurl [html]:</strong> The url that will be shared for the Twitter button.  Defaults to shareUrl if not specified.</li>
+			<li><strong>twitter.defaultText [js], data-twtext [html]:</strong> (default: 'Check out this site!') The text that will appear in the Twitter dialog when clicking on the button before the shared url.</li>
+
+			<li><strong>twitter.hash [js], data-twhash [html]:</strong> See <a href="https://dev.twitter.com/docs/intents#tweet-intent" target="_blank">hashtags</a>.</li>
+			<li><strong>twitter.reply [js], data-twreply [html]:</strong>  See <a href="https://dev.twitter.com/docs/intents#tweet-intent" target="_blank">in_reply_to</a>.</li>
+			<li><strong>twitter.via [js], data-twvia [html]:</strong>  See <a href="https://dev.twitter.com/docs/intents#tweet-intent" target="_blank">via</a>.</li>
+			<li><strong>twitter.related [js], data-twrelated [html]:</strong>  See <a href="https://dev.twitter.com/docs/intents#tweet-intent" target="_blank">related</a>.</li>
+			
+			<li><strong>facebook.shareUrl [js], data-fbshareurl [html]:</strong> The url that will be shared for the Facebook button.  Defaults to shareUrl if not specified.</li>
+            <li><strong>facebook.hideCommentFlyout [js], data-fbhideflyout [html]:</strong> (default true) Will hide the comment flyout that normally appears when clicking the Facebook Like button.</li>
+			<li><strong>height [js], data-height [html]:</strong> (default 20) The height of the wrapping div for the buttons.</li>
+			<li><strong>buttons [js], data-buttons [html]:</strong> (default facebook, google, twitter) The buttons that will be displayed.  For html it is a comma delimited list, for js it is an object with each one desired as a property set to true.</li>
+
+            <li><strong>containerFloat [js], data-float [html]:</strong> The float position of the share container.  If not specified, defaults to 'left'.</li>
+		</ul>
+		<br/>
+<h3>Example JS call with full options: </h3>
+<pre>
+	$('#shareme').lazySocialButtons({
+		shareUrl: 'http://godaddy.com',
+		buttons: { facebook: true, google: true, twitter: true },
+		facebook: {
+			shareUrl: 'http://facebook.godaddy.com'
+		},
+		twitter: {
+			shareUrl: 'http://twitter.godaddy.com',
+			defaultText: 'Twitter on GoDaddy.com: ',
+			hash: 'HotForTech',
+			related: 'GoDaddy',
+			via: 'twicodeer',
+			reply: '35782000644194304'
+		},
+		google: {
+			shareUrl: 'http://google.godaddy.com'
+		},
+		height: 20
+	});
+</pre>
+
+<h3>Example decorated html tag with full options: </h3>
+<strong>Must have the 'lazysocialbuttons' class</strong><br/>
+<pre>
+	&lt;div 
+		class="lazysocialbuttons" 
+		data-height="100" 
+		data-twshareurl="http://twitter.godaddy.com"
+		data-twtext="Twitter on GoDaddy.com: "
+		data-twhash="HotForTech"
+		data-twrelated="GoDaddy"
+		data-twvia="twicodeer"
+		data-twreply="35782000644194304"
+		data-fbshareurl="http://facebook.godaddy.com"		
+		data-gpshareurl="http://google.godaddy.com"
+		data-shareurl="http://godaddy.com"
+		data-buttons="google,facebook,twitter"&gt;
+	&lt;/div&gt;            
+</pre>
+If an element is decorated you can initialize it via js by passing an empty object for the options.
+<pre>
+	$('#shareme').lazySocialButtons({});
+</pre>
+<br/>
+<h3>Please view source for code samples and comments for implemention examples.</h3>
+<br/><br/>
+	</div>
+</div>
+<script type="text/javascript">
+
+// **** Start Plugin Implementation ****************************
+// Uncomment the code line below to specify the path to the two images
+// under two circumstances: 1) you are using the HTML decoration auto-wireup
+// and 2) your images are not in the same root folder as the executing script 
+// (which would be used automatically if not specified) 
+//var lazySocialButtonsImagePath = 'http://mydomain.com/myrootpath/';
+
+// This code will execute after the plugin is loaded to demonstrate
+// loading one without attribute decoration for option specification
+// (ie. the normal way to call jQuery plugins)
+// You may not need this functionality if you are relying on 
+// attribute decoration on plugin load to apply the plugin.
+function lsbReady() {
+    $('#sharemetoo').lazySocialButtons({
+		shareUrl: 'http://godaddy.com',
+		twitter: {
+			hash: 'HotForTech',
+			related: 'GoDaddy',
+			via: 'twicodeer',
+			reply: '35782000644194304'
+		}
+	});
+};
+
+// This is the asynchronous loader for the plugin script.
+// It also handles a ready callback if specified, by checking 
+// to see if the plugin is fully loaded before trying to execute
+// the callback.
+(function (loaded){
+	var d = document, 
+		id = 'LazySocialButtonsScript', 
+		src = 'lazySocialButtons.js';
+        //src = 'http://localhost/starfield/opensource/lazySocialButtons/lazySocialButtons.js';
+	var js, st = d.getElementsByTagName('script')[0];
+	if (d.getElementById(id)) { return; }
+	js = d.createElement('script');
+	js.id = id;
+	js.type = "text/javascript";
+	js.async = true;
+	js.src = src;
+	st.parentNode.insertBefore(js, st);
+	
+	// if we have a callback, execute it
+	if (typeof(loaded) === 'function') {
+		(function checkLoaded() {
+			if (!$.fn.lazySocialButtons) setTimeout(checkLoaded, 100);
+			else loaded();
+		})();
+	}
+})(lsbReady);
+// **** End Plugin Implemention *********************************
+
+function loadDynamic() {
+	$('<div style="margin: 50px;"><div style="margin: 0 0 10px 0">Loaded dynamically:</div><div class="shareme"></div></div>')
+		.insertAfter($('.wrap').last())
+		.find('.shareme')
+		.lazySocialButtons({ shareUrl: 'http://godaddy.com' });
+}
+
+</script>
+
+</body>
+</html>
