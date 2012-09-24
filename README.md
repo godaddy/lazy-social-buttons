@@ -88,6 +88,8 @@ $('#shareme').lazySocialButtons({
 ```
 
 ### Decorated HTML tag with full options:
+
+```html
 <div 
 	class="lazysocialbuttons" 
 	data-height="100" 
@@ -141,7 +143,7 @@ twitter.reply [js], data-twreply [html]                   |                     
 twitter.via [js], data-twvia [html]                       |                           | See [via](https://dev.twitter.com/docs/intents#tweet-intent)
 twitter.related [js], data-twrelated [html]               |                           | See [related](https://dev.twitter.com/docs/intents#tweet-intent)
 facebook.shareUrl [js], data-fbshareurl [html]            |                           | The url that will be shared for the Facebook button. Defaults to shareUrl if not specified.
-facebook.hideCommentFlyout [js], data-fbhideflyout [html] | true                      | Will hide the comment flyout that normally appears when clicking the Facebook Like button.
+facebook.hideCommentFlyout [js], data-fbhideflyout [html] | false                     | Will hide the comment flyout that normally appears when clicking the Facebook Like button.
 height [js], data-height [html]                           | 20                        | The height in pixels of the wrapping div for the buttons.
 buttons [js], data-buttons [html]                         | facebook, google, twitter | The buttons that will be displayed. For html it is a comma delimited list, for js it is an object with each one desired as a property set to true.
 containerFloat [js], data-float [html]                    |                           | The float position of the share container. If not specified, defaults to 'left'.
