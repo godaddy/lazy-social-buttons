@@ -1,5 +1,36 @@
+/* 
+==============================================================================
+Plugin: lazySocialButtons.js
+Author: Lindsay Donaghe
+Project URL: https://github.com/godaddy/lazy-social-buttons
+License:
+The MIT License (MIT)
+
+Copyright (c) 2012 Go Daddy Operating Company, LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a 
+copy of this software and associated documentation files (the "Software"), 
+to deal in the Software without restriction, including without limitation 
+the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+and/or sell copies of the Software, and to permit persons to whom the 
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included 
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
+THE SOFTWARE.
+============================================================================== 
+*/
+
 (function ($)
 {
+    // initialize each selected element
     function LazySocialButtons(el, options, id)
     {
         this.id = id;
@@ -51,7 +82,7 @@
         buttons: { facebook: true, google: true, twitter: true },
         facebook: {
             shareUrl: null,
-            hideCommentFlyout: true
+            hideCommentFlyout: false
         },
         twitter: {
             shareUrl: null,
@@ -139,7 +170,7 @@
     // the plugin before that to pass it as an option, a global
     // variable can be defined early on the page that holds the
     // path. Yes, not ideal, but one way around the issue.
-    proto.imagePath = typeof(lazySocialButtonsImagePath) === 'undefined' ? undefined : lazySocialButtonsImagePath;
+    proto.imagePath = typeof (lazySocialButtonsImagePath) === 'undefined' ? undefined : lazySocialButtonsImagePath;
 
     // This function is a second "automatic" option for getting the 
     // path for the two images when using the HTML attribute auto
@@ -189,6 +220,14 @@
             js.type = "text/javascript";
             js.async = async;
             js.src = src;
+            var attributes = apis[service].attributes;
+            if ($.isPlainObject(attributes))
+            {
+                for (var attr in attributes)
+                {
+                    if (attributes.hasOwnProperty(attr)) js[attr] = attributes[attr];
+                }
+            }
             st.parentNode.insertBefore(js, st);
         };
         // performs a callback once an API is fully loaded.
@@ -253,6 +292,7 @@
         this.google = {
             path: "//apis.google.com/js/plusone.js",
             scriptId: 'google-jssdk',
+            attributes: { lang: 'en-Us', parsetags: 'explicit' },
             triggeredApiLoad: false,
             postload: function ()
             {
@@ -326,30 +366,22 @@
                 var loadit = function ()
                 {
                     var fbRootSel = '#lsbfbbox-' + $m.id;
-                    $(fbRootSel).css('background', 'transparent url(' + $m.getImagePath() + 'images/sf-spinner.gif) no-repeat 50% 50%');
-
-                    FB.XFBML.parse();
-
-                    // Facebook takes a while to REALLY load
-                    (function waitForLoad()
+                    var fbEl = $(fbRootSel);
+                    fbEl.css('background', 'transparent url(' + $m.getImagePath() + 'images/sf-spinner.gif) no-repeat 50% 50%');
+                    FB.XFBML.parse(fbEl[0], function ()
                     {
                         var fbFrame = $(fbRootSel).find('iframe');
-                        if (fbFrame.length <= 0) setTimeout(loadit, 1000);
-                        else
-                        {
-                            // frame is here, give it one more second and remove overlay
-                            setTimeout(function ()
-                            {
-                                // prevent the comment flyout from showing if option specified
-                                var ops = { overflow: ($m.options.facebook.hideCommentFlyout ? 'hidden' : ''), background: '' };
-                                var fbWidth = fbFrame.width();
-                                ops.width = fbWidth > 0 && fbWidth < 100 ? fbWidth : 100;
-                                if ($m.isIE(7)) ops.position = 'relative';
+                        // prevent the comment flyout from showing if option specified
+                        var ops = {
+                            overflow: ($m.options.facebook.hideCommentFlyout ? 'hidden' : ''),
+                            'background': ''
+                        };
+                        var fbWidth = fbFrame.width();
+                        ops.width = fbWidth > 0 && fbWidth < 100 ? fbWidth : 100;
+                        if ($m.isIE(7)) ops.position = 'relative';
 
-                                $(fbRootSel).css(ops)
-                            }, 500);
-                        }
-                    })(); // kick it off
+                        $(fbRootSel).css(ops);
+                    });
                 };
 
                 $m.facebookApi.ready(loadit);
@@ -477,7 +509,7 @@
                     {
                         try
                         {
-                            window.gapi.plusone.go();
+                            window.gapi.plusone.go($(gpboxSel)[0]);
                             finish();
                         }
                         catch (ex)
@@ -529,19 +561,25 @@
 
         this.content();
 
+        this.element
+            .append(this.holder)
+            .append('<div style="clear:both;"></div>'); // be nice to the DOM
+
         // the on demand part
         if (!(this.googleApi.isLoaded() && this.twitterApi.isLoaded() && this.facebookApi.isLoaded()))
         {
+            var $m = this;
             // bind the mouseover to load the APIs
             this.holder.bind('mouseover.lsb', function ()
             {
                 var shares = $('.lazysocialbuttons');
                 shares.unbind('mouseover.lsb');
+                var shareCount = shares.length;
 
                 // go ahead and fix any other instances on the page
                 // since there's no reason to hide them with the
                 // APIs loaded for one instance.
-                shares.each(function ()
+                shares.each(function (i)
                 {
                     var share = $fn.instances[$(this).attr('id')];
                     if (share && share.module)
@@ -552,12 +590,10 @@
             });
             this.holder.addClass('lazysocialbuttons');
         }
-        // if any API is loaded, go ahead and load the others.
-        else this.configure();
+        // if all APIs is loaded, go ahead and configure
+        else
+            this.configure();
 
-        this.element
-            .append(this.holder)
-            .append('<div style="clear:both;"></div>'); // be nice to the DOM
     };
 
     // set up the jQuery plugin
