@@ -51,7 +51,7 @@ There are two ways to load the plugin on your page:
 	})(lsbReady);
 </script>
 ```
-NOTE: The ID of 'LazySocialButtonsScript' must be specified for the automatic image pathing to occur (see below).
+**NOTE: The ID of 'LazySocialButtonsScript' must be specified for the automatic image pathing to occur (see below).**
 
 ## Usage
 
@@ -105,7 +105,7 @@ $('#shareme').lazySocialButtons({
 	data-buttons="google,facebook,twitter">
 </div>   
 ```
-NOTE: class of 'lazysocialbuttons' *must* be specified.
+**NOTE: class of 'lazysocialbuttons' *must* be specified.**
 
 Any elements with the class will be initialized on plugin load.  
 If you want to add HTML to the DOM dynamically which is decorated you can initialize the plugin on the element like so:
