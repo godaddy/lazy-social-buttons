@@ -4,9 +4,6 @@
 A JavaScript plugin to place social buttons on a page on user interaction (mouseover) 
 to spare the initial page load from the 300kb+ download requests for social APIs.
 
-## Examples 
-
-
 ## Requires
 
 * jQuery v1.4+
@@ -105,11 +102,12 @@ $('#shareme').lazySocialButtons({
 	data-shareurl="http://godaddy.com"
 	data-buttons="google,facebook,twitter">
 </div>   
-```html   
+```
 NOTE: class of 'lazysocialbuttons' *must* be specified.
 
 Any elements with the class will be initialized on plugin load.  
 If you want to add HTML to the DOM dynamically which is decorated you can initialize the plugin on the element like so:
+
 ```html
 <script>
 	$('#newElement').lazySocialButtons({});
@@ -123,6 +121,7 @@ There are three ways to specify the path where these images are located, the mos
 * If the images are located in the same directory as the plugin script, and the script tag has an id of 'LazySocialButtonsScript' then the path to the images will be derived relative to the script.
 * If the images are located somewhere else and the plugin is initialized after page load, the option of imagePath may be specified.
 * If the images are located somewhere else and the HTML attribute decorations with auto wire-up is chosen, then the following global variable must be defined prior to the script loading on the page:
+
 ```html
 <script>
 	var lazySocialButtonsImagePath = '[your path to images]/';
