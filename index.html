@@ -75,7 +75,7 @@
 <div class="demo">
     <div class="wrap">
         <div class="label">Loaded via attribute decoration:</div>
-        <div class="lazysocialbuttons" data-float="left" id="shareme" data-twshareurl="http://twitter.godaddy.com" data-twtext="Twitter on GoDaddy.com" data-shareurl="http://godaddy.com" data-twhash="HotForTech" data-twrelated="GoDaddy" data-twvia="twicodeer" data-twreply="35782000644194304"></div>
+        <div class="lazysocialbuttons" data-float="left" id="shareme" data-shareurl="http://godaddy.github.com/lazy-social-buttons/" data-twtext="lazySocialShare Plugin" data-twhash="GoDaddyOpenSource" data-twrelated="GoDaddy" data-twvia="godaddy"></div>
     </div>
     <div class="wrap">
         <div class="label">Loaded via explicit plugin call:</div>
@@ -107,12 +107,11 @@
 // attribute decoration on plugin load to apply the plugin.
 function lsbReady() {
     $('#sharemetoo').lazySocialButtons({
-        shareUrl: 'http://godaddy.com',
+        shareUrl: 'http://godaddy.github.com/lazy-social-buttons/',
         twitter: {
-            hash: 'HotForTech',
+            hash: 'GoDaddyOpenSource',
             related: 'GoDaddy',
-            via: 'twicodeer',
-            reply: '35782000644194304'
+            via: 'godaddy'
         }
     });
 };
@@ -148,7 +147,14 @@ function loadDynamic() {
     $('<div class="wrap"><div class="label">Loaded dynamically:</div><div class="shareme"></div></div>')
         .insertAfter($('.wrap').last())
         .find('.shareme')
-        .lazySocialButtons({ shareUrl: 'http://godaddy.com' });
+        .lazySocialButtons({
+			shareUrl: 'http://godaddy.github.com/lazy-social-buttons/',
+			twitter: {
+				hash: 'GoDaddyOpenSource',
+				related: 'GoDaddy',
+				via: 'godaddy'
+			}
+		});
 }    
 </script>
   </body>
