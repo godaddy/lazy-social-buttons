@@ -22,14 +22,14 @@ There are two ways to load the plugin on your page:
 ### Blocking Script Load:
 
 The script tag below should either be placed at the bottom of the body after the document HTML for both the HTML attribute usage and the JavaScript call usage. 
-It could be placed at the top of the page for the JavaScript call usage, but only if the usage call is within a jQuery document.ready block.
+It could be placed in the head block for the JavaScript call usage, but only if the usage call is within a jQuery document.ready callback.
 
 ```html
 <script id="LazySocialButtonsScript" src="[your path]/lazySocialButtons.js"></script>
 ```
 
 ### Non-Blocking Script Load:
-The loading block below should be placed at the bottom of the body after the document HTML for the HTML attribute usage.
+The main objective for non-blocking is to let the HTML render and other scripts load before loading this script.  The loading block should be placed at the bottom of the body after the document HTML to accomplish this goal.  It is also necessary for the HTML attribute auto wire-up usage for this code to be loaded after the HTML has rendered on the page.
 
 ```html
 <script>
