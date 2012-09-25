@@ -21,7 +21,7 @@ There are two ways to load the plugin on your page:
 
 ### Blocking Script Load:
 
-The script tag below should either be placed at the bottom just before the </body> for both the HTML attribute usage and the JavaScript call usage. 
+The script tag below should either be placed at the bottom just before the &lt;/body&gt; for both the HTML attribute usage and the JavaScript call usage. 
 It could be placed in the head block for the JavaScript call usage, but only if the usage call is within a jQuery document.ready callback.
 
 ```html
@@ -30,8 +30,8 @@ It could be placed in the head block for the JavaScript call usage, but only if 
 
 ### Non-Blocking Script Load:
 The main objective for non-blocking is to let the HTML render and other scripts load before loading this script.  
-The loading block should be placed at the bottom just before the </body> to accomplish this goal.  
-It is also necessary to place the loading block just before the </body> for the HTML attribute auto wire-up usage to function properly (the HTML must be rendered on the page).
+The loading block should be placed at the bottom just before the &lt;/body&gt; to accomplish this goal.  
+It is also necessary to place the loading block just before the &lt;/body&gt; for the HTML attribute auto wire-up usage to function properly (the HTML must be rendered on the page).
 
 ```html
 <script>
