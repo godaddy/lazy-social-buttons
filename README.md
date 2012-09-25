@@ -73,7 +73,7 @@ There are two ways the plugin may be initialized against HTML elements:
 Place an element in the HTML body where you want the buttons to appear.
 
 ```html
-	<div id="shareme"></div>
+<div id="shareme"></div>
 ```
 
 Initialize the plugin against the element any time after the plugin script is loaded and the element is rendered on the page.
