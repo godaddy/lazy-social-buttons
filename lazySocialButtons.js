@@ -567,13 +567,11 @@ THE SOFTWARE.
         // the on demand part
         if (!(this.googleApi.isLoaded() && this.twitterApi.isLoaded() && this.facebookApi.isLoaded()))
         {
-            var $m = this;
             // bind the mouseover to load the APIs
             this.holder.bind('mouseover.lsb', function ()
             {
                 var shares = $('.lazysocialbuttons');
                 shares.unbind('mouseover.lsb');
-                var shareCount = shares.length;
 
                 // go ahead and fix any other instances on the page
                 // since there's no reason to hide them with the
