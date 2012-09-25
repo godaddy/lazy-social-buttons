@@ -27,7 +27,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ============================================================================== 
 */
-
 (function ($)
 {
     // initialize each selected element
@@ -182,7 +181,7 @@ THE SOFTWARE.
         if (typeof (proto.imagePath) === 'undefined')
         {
             var src = $(document).find('script[id="LazySocialButtonsScript"]').attr('src').toLowerCase();
-            src = src.replace('lazysocialbuttons.js', '');
+            src = src.replace(/(lazysocialbuttons(\.min)?\.js)/gi, '');
             proto.imagePath = src;
         }
         return proto.imagePath;
@@ -274,7 +273,7 @@ THE SOFTWARE.
             var me = this[service];
             var scriptInDom = $('script#' + me.scriptId).length > 0;
             return (scriptInDom && me.testLoaded());
-        }
+        };
         // API details for Facebook
         this.facebook = {
             path: 'https://connect.facebook.net/en_US/all.js#xfbml=1',
@@ -309,7 +308,7 @@ THE SOFTWARE.
             scriptId: 'twitter-wjs',
             triggeredApiLoad: false,
             testLoaded: function () { return (typeof (twttr) !== 'undefined'); }
-        }
+        };
 
         // expose public methods
         return {
@@ -530,10 +529,10 @@ THE SOFTWARE.
     {
         var b = this.builders;
 
+        b.facebook.configure(this.holder);
         b.google.configure(this.holder);
         b.twitter.configure(this.holder);
-        b.facebook.configure(this.holder);
-    }
+    };
 
     // load all content
     proto.content = function ()
@@ -543,7 +542,7 @@ THE SOFTWARE.
         b.google.content(this.holder);
         b.twitter.content(this.holder);
         b.facebook.content(this.holder);
-    }
+    };
 
     // kick off the plugin functionality
     proto.create = function ()

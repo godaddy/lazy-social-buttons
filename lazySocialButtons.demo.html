@@ -6,15 +6,17 @@
 
 <title>Lazy Social Buttons Plugin</title>
 <style>
-	li {
-		padding: 5px;
-	}
+	body { font-family: tahoma; margin: 30px; }
+	.action { margin: 30px 0 10px 0; }
+    .action a { text-decoration: none; }
+	li { padding: 5px; }
 </style>
 </head>
 <body>
 <div id="main">
 	<h1>Lazy Social Buttons Plugin</h1>
-	<div style="width: 450px;">
+	<div class="blurb"><strong>lazySocialButtons.js</strong>: A JavaScript plugin to place social buttons on a page on user interaction (mouseover) to spare the initial page load from the 300kb+ download requests for social APIs. <strong><a href="https://github.com/godaddy/lazy-social-buttons">Get the source on GitHub!</a></strong></div>
+	<div class="action">
 			<a href="javascript: void(0);" onclick="loadDynamic();return false;" >Load a share dynamically</a>
 		
 	</div>
@@ -143,8 +145,8 @@ If an element is decorated you can initialize it via js by passing an empty obje
 // Uncomment the code line below to specify the path to the two images
 // under two circumstances: 1) you are using the HTML decoration auto-wireup
 // and 2) your images are not in the same root folder as the executing script 
-// (which would be used automatically if not specified) 
-//var lazySocialButtonsImagePath = 'http://mydomain.com/myrootpath/';
+// (which would be used automatically if not specified)
+//var lazySocialButtonsImagePath = '[your path here]';
 
 // This code will execute after the plugin is loaded to demonstrate
 // loading one without attribute decoration for option specification
@@ -171,7 +173,6 @@ function lsbReady() {
 	var d = document, 
 		id = 'LazySocialButtonsScript', 
 		src = 'lazySocialButtons.js';
-        //src = 'http://localhost/starfield/opensource/lazySocialButtons/lazySocialButtons.js';
 	var js, st = d.getElementsByTagName('script')[0];
 	if (d.getElementById(id)) { return; }
 	js = d.createElement('script');

@@ -8,6 +8,11 @@ to spare the initial page load from the 300kb+ download requests for social APIs
 
 * jQuery v1.4+
 
+## Demo
+
+Please see the [demo on jsFiddle.net](http://jsfiddle.net/BlueCockatoo/STths/) for usage and implementation.
+Since this plugin has multiple configurations for loading and usage, the demo is helpful for understanding the order of includes.
+
 ## Loading
 
 There are two ways to load the plugin on your page: 
@@ -16,11 +21,15 @@ There are two ways to load the plugin on your page:
 
 ### Blocking Script Load:
 
+The script tag below should either be placed at the bottom of the body after the document HTML for both the HTML attribute usage and the JavaScript call usage. 
+It could be placed at the top of the page for the JavaScript call usage, but only if the usage call is within a jQuery document.ready block.
+
 ```html
 <script id="LazySocialButtonsScript" src="[your path]/lazySocialButtons.js"></script>
 ```
 
 ### Non-Blocking Script Load:
+The loading block below should be placed at the bottom of the body after the document HTML for the HTML attribute usage.
 
 ```html
 <script>
@@ -61,6 +70,14 @@ There are two ways the plugin may be initialized against HTML elements:
 
 ### JavaScript call with full options:
 
+Place an element in the HTML body where you want the buttons to appear.
+
+```html
+	<div id="shareme"></div>
+```
+
+Initialize the plugin against the element any time after the plugin script is loaded and the element is rendered on the page.
+
 ```html
 <script>
 $('#shareme').lazySocialButtons({
@@ -89,10 +106,12 @@ $('#shareme').lazySocialButtons({
 
 ### Decorated HTML tag with full options:
 
+Place and element with HTML attributes in the HTML body where you want the buttons to appear.
+
 ```html
 <div 
 	class="lazysocialbuttons" 
-	data-height="100" 
+	data-height="20" 
 	data-twshareurl="http://twitter.godaddy.com"
 	data-twtext="Twitter on GoDaddy.com: "
 	data-twhash="HotForTech"
@@ -108,11 +127,22 @@ $('#shareme').lazySocialButtons({
 **NOTE: class of 'lazysocialbuttons' *must* be specified.**
 
 Any elements with the class will be initialized on plugin load.  
-If you want to add HTML to the DOM dynamically which is decorated you can initialize the plugin on the element like so:
+If you want to add decorated HTML to the DOM dynamically you can initialize the plugin on the element like so:
 
 ```html
 <script>
-	$('#newElement').lazySocialButtons({});
+	$('<div>')
+		.attr({
+			'data-twshareurl': http://twitter.godaddy.com',
+			'data-twtext': 'Twitter on GoDaddy.com: ',
+			'data-twhash': 'HotForTech',
+			'data-twrelated': 'GoDaddy',
+			'data-twvia': 'twicodeer',
+			/* more attributes */
+			'data-buttons': 'google,facebook,twitter' 
+		})
+		.appendTo(myButtonContainer)
+		.lazySocialButtons({});
 </script>
 ```
 
