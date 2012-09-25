@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Lazy-social-buttons by godaddy</title>
+    <title>lazySocialButtons by GoDaddy</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -15,7 +15,8 @@
 
 	<style>
 	.blurb strong { font-weight: bold; }
-	.action { margin: 30px 0 10px 0; }
+	h3 { margin-top: 20px; }
+	.action { margin: 20px 0 10px 0; }
 	.action a { text-decoration: none; }
 	.demo { border: 2px solid #ddd; }
 	.wrap { margin: 30px; }
@@ -25,7 +26,7 @@
   <body>
 
       <header>
-        <h1>Lazy-social-buttons</h1>
+        <h1>lazySocialButtons</h1>
         <p>A JavaScript plugin to place social buttons on a page on user interaction (mouseover) to spare the initial page load from the 300kb+ download requests for social APIs.</p>
       </header>
 
@@ -47,8 +48,25 @@
         <ul></ul>
       </nav>
       <section>
-        <h3>lazySocialButtons.js</h3>
-
+        <h2>lazySocialButtons.js</h2>
+		<div>
+			Social buttons are great ways to spread the word about your site or blog, and the popular social sites provide easy snippets of code
+			to let you add them to your page without a lot of fuss.  The problem is that these scripts can add a lot of weight to your page.
+			All of their resources must load on the page before your visitor can interact with it, and depending on where you place them,
+			can even delay the visual parts of the page from loading until they are finished.
+			<br/><br/>
+			The lazySocialButtons plugin solves this problem by only loading the social buttons on your page when your visitor interacts
+			with them, specifically when they mouse over them for the first time.  You still get the benefits of social networking without making
+			your visitors wait to see your site.
+			<br/><br/>
+			The buttons below were loaded by two different methods the plugin supports.  You can also load buttons on the fly. Try it with the
+			link below.
+			<br/><br/>
+			Check out the <a href="https://github.com/godaddy/lazy-social-buttons">GitHub repository</a> for full documentation and demo.
+		</div>
+		<br/>
+		<hr/>
+		<h3>lazySocialButtons in action!</h3>
 <div class="action">         
             <a href="javascript: void(0);" onclick="loadDynamic();return false;">&#9658; Load a share dynamically</a>
         
@@ -67,7 +85,9 @@
 </div>
       </section>
       <footer>
-        <p>Project maintained by <a href="https://github.com/godaddy">godaddy</a></p>
+        <p>Project maintained by <br/>
+		<a href="https://github.com/godaddy"><img src="https://secure.gravatar.com/avatar/7d80929d45009e28da3bd16acfa04a92?s=100&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" /></a><br/>
+		<a href="https://github.com/godaddy" style="white-space: no-wrap;">Go Daddy</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
