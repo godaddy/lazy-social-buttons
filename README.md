@@ -101,7 +101,8 @@ $('#shareme').lazySocialButtons({
 		shareUrl: 'http://google.godaddy.com'
 	},
 	height: 20,
-	imagePath: '[your image path]/'
+	imagePath: '[your image path]/',
+	backgroundType: 'light'
 });
 </script>
 ```
@@ -123,7 +124,8 @@ Place and element with HTML attributes in the HTML body where you want the butto
 	data-fbshareurl="http://facebook.godaddy.com"		
 	data-gpshareurl="http://google.godaddy.com"
 	data-shareurl="http://godaddy.com"
-	data-buttons="google,facebook,twitter">
+	data-buttons="google,facebook,twitter"
+	data-backgroundtype="light">
 </div>   
 ```
 **NOTE: class of 'lazysocialbuttons' *must* be specified.**

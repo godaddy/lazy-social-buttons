@@ -353,7 +353,7 @@ THE SOFTWARE.
                                 .attr('data-href', $m.options.facebook.shareUrl)
                                 .attr('data-send', 'false')
                                 .attr('data-show-faces', 'false')
-                                .attr('data-colorscheme', $m.options.backgroundType)
+                                .attr('data-colorscheme', 'light')
                                 .attr('data-sfid', $m.id)
                         );
                     if ($m.isIE(7)) el.css({ zoom: '1', display: 'inline' });
