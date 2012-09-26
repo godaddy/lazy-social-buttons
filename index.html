@@ -19,7 +19,8 @@
 	.action { margin: 20px 0 10px 0; }
 	.action a { text-decoration: none; }
 	.demo { border: 2px solid #ddd; }
-	.wrap { margin: 30px; }
+	.wrap { margin: 15px; padding: 15px; }
+	.wrap.dark{ color: #FFF; background: #333; }
 	.label { margin: 0 0 10px 0; }
 	</style>
   </head>
@@ -81,7 +82,10 @@
         <div class="label">Loaded via explicit plugin call:</div>
         <div id="sharemetoo"></div>
     </div>
-
+    <div class="wrap dark">
+        <div class="label">Loaded via attribute decoration (dark, right align):</div>
+        <div class="lazysocialbuttons" data-backgroundtype="dark" data-float="right" id="sharemedark" data-shareurl="http://godaddy.github.com/lazy-social-buttons/" data-twtext="lazySocialShare Plugin" data-twhash="GoDaddyOpenSource" data-twrelated="GoDaddy" data-twvia="godaddy"></div>
+    </div>
 </div>
       </section>
       <footer>
@@ -98,7 +102,7 @@
 // under two circumstances: 1) you are using the HTML decoration auto-wireup
 // and 2) your images are not in the same root folder as the executing script
 // (which would be used automatically if not specified)
-//var lazySocialButtonsImagePath= 'http://img1.wsimg.com/starfield/opensource/lazySocialButtons/demo/';
+//var lazySocialButtonsImagePath= 'http://img1.wsimg.com/starfield/opensource/lazySocialButtons/demo1/';
 
 // This code will execute after the plugin is loaded to demonstrate
 // loading one without attribute decoration for option specification
@@ -123,7 +127,7 @@ function lsbReady() {
 (function (loaded){
     var d = document,
         id = 'LazySocialButtonsScript',
-        src = 'http://img1.wsimg.com/starfield/opensource/lazySocialButtons/demo/lazySocialButtons.js';
+        src = 'http://img1.wsimg.com/starfield/opensource/lazySocialButtons/demo1/lazySocialButtons.js';
     var js, st = d.getElementsByTagName('script')[0];
     if (d.getElementById(id)) { return; }
     js = d.createElement('script');
