@@ -180,6 +180,7 @@ height [js], data-height [html]                           | 20                  
 buttons [js], data-buttons [html]                         | facebook, google, twitter | The buttons that will be displayed. For html it is a comma delimited list, for js it is an object with each one desired as a property set to true.
 containerFloat [js], data-float [html]                    |                           | The float position of the share container. If not specified, defaults to 'left'.
 imagePath [js]                                            |                           | The path to the two required images. See the Image Path section above.
+backgroundType [js], data-backgroundtype [html]           | 'light'                   | The general darkness of the background the buttons will be displayed on, for image aliasing purposes.
 
 
 ## License

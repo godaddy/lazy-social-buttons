@@ -57,6 +57,7 @@ THE SOFTWARE.
                 shareUrl: ops.google.shareUrl ? ops.google.shareUrl : ops.shareUrl
             }
         });
+        ops.backgroundType = ops.backgroundType.toLowerCase() === 'dark' ? 'dark' : 'light';
         this.options = ops;
 
         this.baseClass = 'lazysocialbuttons';
@@ -77,6 +78,7 @@ THE SOFTWARE.
     proto.options = {
         shareUrl: null,
         imagePath: undefined,
+        backgroundType: 'light', // could be 'dark'
         containerFloat: 'left',
         buttons: { facebook: true, google: true, twitter: true },
         facebook: {
@@ -100,6 +102,7 @@ THE SOFTWARE.
         var el = this.element;
 
         if (el.attr('data-shareurl')) ops.shareUrl = el.attr('data-shareurl');
+        if (el.attr('data-backgroundtype')) ops.backgroundType = el.attr('data-backgroundtype').toLowerCase() === 'dark' ? 'dark' : 'light';
         if (el.attr('data-float')) ops.containerFloat = el.attr('data-float');
         if (el.attr('data-height')) ops.height = el.attr('data-height');
 
@@ -341,7 +344,7 @@ THE SOFTWARE.
                             position: 'relative',
                             display: 'inline-block',
                             'float': 'left',
-                            'background': 'transparent url(' + $m.getImagePath() + 'images/sf-share-strip-preload.png) no-repeat -195px 0'
+                            'background': 'transparent url(' + $m.getImagePath() + 'images/lsb-preload.png) no-repeat -195px 0'
                         })
                         .append(
                             $('<div />')
@@ -350,7 +353,7 @@ THE SOFTWARE.
                                 .attr('data-href', $m.options.facebook.shareUrl)
                                 .attr('data-send', 'false')
                                 .attr('data-show-faces', 'false')
-                                .attr('data-colorscheme', 'light')
+                                .attr('data-colorscheme', $m.options.backgroundType)
                                 .attr('data-sfid', $m.id)
                         );
                     if ($m.isIE(7)) el.css({ zoom: '1', display: 'inline' });
@@ -366,7 +369,7 @@ THE SOFTWARE.
                 {
                     var fbRootSel = '#lsbfbbox-' + $m.id;
                     var fbEl = $(fbRootSel);
-                    fbEl.css('background', 'transparent url(' + $m.getImagePath() + 'images/sf-spinner.gif) no-repeat 50% 50%');
+                    fbEl.css('background', 'transparent url(' + $m.getImagePath() + 'images/lsb-spinner-' + $m.options.backgroundType + '.gif) no-repeat 50% 50%');
                     FB.XFBML.parse(fbEl[0], function ()
                     {
                         var fbFrame = $(fbRootSel).find('iframe');
@@ -418,7 +421,7 @@ THE SOFTWARE.
                             marginRight: '10px',
                             display: 'inline-block',
                             'float': 'left',
-                            'background': 'transparent url(' + $m.getImagePath() + 'images/sf-share-strip-preload.png) no-repeat -84px 0'
+                            'background': 'transparent url(' + $m.getImagePath() + 'images/lsb-preload.png) no-repeat -84px 0'
                         })
                        .append(a);
                     //if ($m.isIE(7)) el.css({ zoom: '1', display: 'inline' });
@@ -431,7 +434,7 @@ THE SOFTWARE.
                 if (!$m.options.buttons.twitter) return;
 
                 var twboxSel = '#lsbtwbox-' + $m.id;
-                $(twboxSel).css('background', 'transparent url(' + $m.getImagePath() + 'images/sf-spinner.gif) no-repeat 50% 50%');
+                $(twboxSel).css('background', 'transparent url(' + $m.getImagePath() + 'images/lsb-spinner-' + $m.options.backgroundType + '.gif) no-repeat 50% 50%');
 
                 $m.twitterApi.ready(function ()
                 {
@@ -473,7 +476,7 @@ THE SOFTWARE.
                             display: 'inline-block',
                             marginRight: '10px',
                             'float': 'left',
-                            'background': 'transparent url(' + $m.getImagePath() + 'images/sf-share-strip-preload.png) no-repeat 0 0'
+                            'background': 'transparent url(' + $m.getImagePath() + 'images/lsb-preload.png) no-repeat 0 0'
                         });
                     // This is a workaround to get around an IE8 bug (version 8.0.7600.16385 only) 
                     // See  http://stackoverflow.com/questions/6877583/adding-a-google-1-button-after-page-load-in-ie-8 
@@ -493,7 +496,7 @@ THE SOFTWARE.
                 if (!$m.options.buttons.google) return;
 
                 var gpboxSel = '#lsbgpbox-' + $m.id;
-                $(gpboxSel).css('background', 'transparent url(' + $m.getImagePath() + 'images/sf-spinner.gif) no-repeat 50% 50%');
+                $(gpboxSel).css('background', 'transparent url(' + $m.getImagePath() + 'images/sf-spinner-' + $m.options.backgroundType + '.gif) no-repeat 50% 50%');
 
                 $m.googleApi.ready(function ()
                 {
